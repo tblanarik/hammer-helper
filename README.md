@@ -1,2 +1,2 @@
 # hammer-helper
-Helper for our Banhammer RPG
+Helper for our Banehammer RPG
