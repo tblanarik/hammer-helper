@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Currency Reduction Tool</h2>
+<form method="post" action="/currency" class="row g-3 bg-secondary bg-opacity-10 p-4 rounded shadow">
+    <div class="col-md-3">
+        <label for="gold" class="form-label">Current Gold</label>
+        <input type="number" class="form-control bg-dark text-light border-warning" id="gold" name="gold" min="0" value="{{ request.form.gold or 0 }}">
+    </div>
+    <div class="col-md-3">
+        <label for="silver" class="form-label">Current Silver</label>
+        <input type="number" class="form-control bg-dark text-light border-warning" id="silver" name="silver" min="0" value="{{ request.form.silver or 0 }}">
+    </div>
+    <div class="col-md-3">
+        <label for="brass" class="form-label">Current Brass</label>
+        <input type="number" class="form-control bg-dark text-light border-warning" id="brass" name="brass" min="0" value="{{ request.form.brass or 0 }}">
+    </div>
+    <div class="col-md-3">
+        <label for="reduction" class="form-label">% Reduction</label>
+        <input type="number" class="form-control bg-dark text-light border-warning" id="reduction" name="reduction" min="0" max="100" value="{{ request.form.reduction or 0 }}">
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-warning fw-bold">Submit</button>
+    </div>
+</form>
+{% if result %}
+    {% if result == 'error' %}
+        <div class="alert alert-danger mt-4">Invalid input. Please enter valid numbers.</div>
+    {% else %}
+        <div class="alert alert-success mt-4">
+            <h5>Reduced Currency:</h5>
+            <ul class="mb-0">
+                <li><strong>Gold:</strong> {{ result.gold }}</li>
+                <li><strong>Silver:</strong> {{ result.silver }}</li>
+                <li><strong>Brass:</strong> {{ result.brass }}</li>
+            </ul>
+        </div>
+    {% endif %}
+{% endif %}
+{% endblock %}
