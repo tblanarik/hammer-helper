@@ -1,12 +1,22 @@
-def reduce_currency(gold, silver, brass, reduction):
+def reduce_currency(gold, silver, brass, reduction=None, reduce_gold=None, reduce_silver=None, reduce_brass=None):
     """
-    Convert gold/silver/brass to brass, apply reduction, then convert back:
+    Convert gold/silver/brass to brass, apply reduction (percent or fixed amount), then convert back:
     - At least 20 brass, at least 10 silver, rest gold, remainder as brass
     """
     # Convert all to brass
     total_brass = gold * 240 + silver * 12 + brass
     # Apply reduction
-    reduced_brass = int(total_brass * (1 - reduction / 100))
+    if reduction is not None:
+        reduced_brass = int(total_brass * (1 - reduction / 100))
+    elif any(x is not None for x in [reduce_gold, reduce_silver, reduce_brass]):
+        reduce_gold = int(reduce_gold or 0)
+        reduce_silver = int(reduce_silver or 0)
+        reduce_brass = int(reduce_brass or 0)
+        reduction_amount = reduce_gold * 240 + reduce_silver * 12 + reduce_brass
+        reduced_brass = max(0, total_brass - reduction_amount)
+    else:
+        reduced_brass = total_brass
+
     # Minimums
     min_brass = 20
     min_silver = 10

@@ -18,8 +18,15 @@ def currency_tool():
             gold = int(request.form.get('gold', 0))
             silver = int(request.form.get('silver', 0))
             brass = int(request.form.get('brass', 0))
-            reduction = float(request.form.get('reduction', 0))
-            result = reduce_currency(gold, silver, brass, reduction)
+            reduction_type = request.form.get('reduction_type', 'percent')
+            if reduction_type == 'amount':
+                reduce_gold = int(request.form.get('reduce_gold', 0))
+                reduce_silver = int(request.form.get('reduce_silver', 0))
+                reduce_brass = int(request.form.get('reduce_brass', 0))
+                result = reduce_currency(gold, silver, brass, None, reduce_gold, reduce_silver, reduce_brass)
+            else:
+                reduction = float(request.form.get('reduction', 0))
+                result = reduce_currency(gold, silver, brass, reduction)
         except Exception:
             result = 'error'
     return render_template('currency_tool.html', result=result, active_page='currency')
