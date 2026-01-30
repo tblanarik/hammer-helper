@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2 class="mb-4">Currency Reduction Tool</h2>
-<form method="post" action="/currency" class="row g-3 bg-secondary bg-opacity-10 p-4 rounded shadow">
+<form method="post" action="/currency" class="row g-3 bg-secondary bg-opacity-10 p-4 rounded shadow" id="currencyForm">
     <div class="col-md-3">
         <label for="gold" class="form-label">Current Gold</label>
         <input type="number" class="form-control bg-dark text-light border-warning" id="gold" name="gold" min="0" value="{{ request.form.gold or 0 }}">
@@ -15,13 +15,46 @@
         <input type="number" class="form-control bg-dark text-light border-warning" id="brass" name="brass" min="0" value="{{ request.form.brass or 0 }}">
     </div>
     <div class="col-md-3">
+        <label class="form-label">Reduction Type</label>
+        <select class="form-select bg-dark text-light border-warning" id="reduction_type" name="reduction_type" onchange="toggleReductionFields()">
+            <option value="percent" {% if request.form.reduction_type != 'amount' %}selected{% endif %}>Percent</option>
+            <option value="amount" {% if request.form.reduction_type == 'amount' %}selected{% endif %}>Amount</option>
+        </select>
+    </div>
+    <div class="col-md-3" id="percent_reduction_group">
         <label for="reduction" class="form-label">% Reduction</label>
         <input type="number" class="form-control bg-dark text-light border-warning" id="reduction" name="reduction" min="0" max="100" value="{{ request.form.reduction or 0 }}">
+    </div>
+    <div class="col-md-3 d-none" id="amount_reduction_group">
+        <label class="form-label">Reduce By (Gold/Silver/Brass)</label>
+        <div class="input-group">
+            <input type="number" class="form-control bg-dark text-light border-warning" name="reduce_gold" id="reduce_gold" min="0" value="{{ request.form.reduce_gold or 0 }}" placeholder="Gold">
+            <input type="number" class="form-control bg-dark text-light border-warning" name="reduce_silver" id="reduce_silver" min="0" value="{{ request.form.reduce_silver or 0 }}" placeholder="Silver">
+            <input type="number" class="form-control bg-dark text-light border-warning" name="reduce_brass" id="reduce_brass" min="0" value="{{ request.form.reduce_brass or 0 }}" placeholder="Brass">
+        </div>
     </div>
     <div class="col-12">
         <button type="submit" class="btn btn-warning fw-bold">Submit</button>
     </div>
 </form>
+<script>
+function toggleReductionFields() {
+    var type = document.getElementById('reduction_type').value;
+    var percentGroup = document.getElementById('percent_reduction_group');
+    var amountGroup = document.getElementById('amount_reduction_group');
+    if (type === 'percent') {
+        percentGroup.classList.remove('d-none');
+        amountGroup.classList.add('d-none');
+    } else {
+        percentGroup.classList.add('d-none');
+        amountGroup.classList.remove('d-none');
+    }
+}
+// On page load, set correct fields
+document.addEventListener('DOMContentLoaded', function() {
+    toggleReductionFields();
+});
+</script>
 {% if result %}
     {% if result == 'error' %}
         <div class="alert alert-danger mt-4">Invalid input. Please enter valid numbers.</div>
