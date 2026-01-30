@@ -1,0 +1,72 @@
+body {
+    background: #18181a !important;
+    color: #e0e0e0;
+    font-family: 'Merriweather', serif;
+}
+
+.navbar, .footer {
+    background: #111112 !important;
+    border-color: #333;
+}
+
+.navbar-brand {
+    font-family: 'UnifrakturCook', cursive;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px #000;
+}
+
+.nav-link {
+    color: #b0a160 !important;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: #ffd700 !important;
+    text-shadow: 0 0 4px #222;
+}
+
+.bg-dark {
+    background-color: #232326 !important;
+}
+
+.form-control {
+    background-color: #232326 !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #444 !important;
+}
+
+.form-control:focus {
+    border-color: #ffd700 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+}
+
+.btn-warning {
+    background: linear-gradient(90deg, #b8860b 0%, #ffd700 100%);
+    color: #18181a;
+    border: none;
+    font-weight: bold;
+    box-shadow: 0 2px 8px #0008;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(90deg, #ffd700 0%, #b8860b 100%);
+    color: #18181a;
+}
+
+.alert-success {
+    background: #232326;
+    border-color: #ffd700;
+    color: #ffd700;
+}
+
+.alert-danger {
+    background: #232326;
+    border-color: #b22222;
+    color: #ff6666;
+}
+
+.shadow {
+    box-shadow: 0 4px 24px #000a !important;
+}
