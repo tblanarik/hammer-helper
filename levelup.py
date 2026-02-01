@@ -11,11 +11,13 @@ def get_level_up_die(career, checks, current_level):
 
 def roll_advancement(skill, current_level, career, checks):
     roll_1d100 = random.randint(1, 100)
-    passed = roll_1d100 > current_level
     die = get_level_up_die(career, checks, current_level)
-    # Special rule for <25: min 1d4
+    # Special rule for <25: min 1d4 and always pass
     if current_level < 25:
         die = max(die, 4)
+        passed = True
+    else:
+        passed = roll_1d100 > current_level
     if passed:
         adv_roll = random.randint(1, die)
         new_level = current_level + adv_roll
