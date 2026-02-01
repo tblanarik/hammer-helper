@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import os
 from levelup import batch_level_up
 from currency import reduce_currency
+from skills import SKILLS
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev-secret-key')
@@ -39,9 +40,7 @@ def currency_tool():
 # Skill Level-Up Tool (Level Up)
 @app.route('/levelup', methods=['GET', 'POST'])
 def levelup():
-    # Read skills from file
-    with open('cleaned_skills.txt') as f:
-        skills = [line.strip() for line in f if line.strip()]
+    skills = SKILLS
     report = session.get('levelup_report')
     if request.method == 'POST':
         # Parse form data for all selected skills
