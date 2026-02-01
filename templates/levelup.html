@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<td>{% if r.passed %}<span class="text-success">✔️ Success</span>{% else %}<span class="text-danger">❌ Fail</span>{% endif %}</td>
 				<td>1d{{ r.die }}</td>
 				<td>{% if r.adv_roll is not none %}{{ r.adv_roll }}{% else %}-{% endif %}</td>
-				<td>{{ r.new_level }}</td>
+				<td>{% if r.new_level == 69 %}69 (Nice){% else %}{{ r.new_level }}{% endif %}</td>
 			</tr>
 		{% endfor %}
 		</tbody>

@@ -62,9 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="alert alert-success mt-4">
             <h5>Reduced Currency:</h5>
             <ul class="mb-0">
-                <li><strong>Gold:</strong> {{ result.gold }}</li>
-                <li><strong>Silver:</strong> {{ result.silver }}</li>
-                <li><strong>Brass:</strong> {{ result.brass }}</li>
+                <li><strong>Gold:</strong> {% if result.gold == 69 %}69 (Nice){% else %}{{ result.gold }}{% endif %}</li>
+                <li><strong>Silver:</strong> {% if result.silver == 69 %}69 (Nice){% else %}{{ result.silver }}{% endif %}</li>
+                <li><strong>Brass:</strong> {% if result.brass == 69 %}69 (Nice){% else %}{{ result.brass }}{% endif %}</li>
                 <li><strong>Percent Over Previous:</strong> {{ result.percent_over|round(2) }}%</li>
             </ul>
         </div>
